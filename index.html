@@ -23,13 +23,17 @@
       var $form = $(this);
       var query = $('#date').val();
       var get = $.ajax({
-        url: "https://l0bdm3nsgg.execute-api.us-west-2.amazonaws.com/prod1" + "/date/" + query,
+        url: "https://gm9k8wsank.execute-api.us-west-2.amazonaws.com/prod1" + "/date/" + query,
         type: "GET"
       });
 
       get.done(function(data) {
         $("#result").css("color", "blue");
-        $("#result").empty().html(data[0].DCOILWTICO);
+        if (typeof(data[0].DCOILWTIC) !== 'undefined') {
+            $("#result").empty().html(data[0].DCOILWTICO);
+        } else {
+            $("#result").empty().html("NOT FOUND");
+        }
       });
       get.fail(function(data) {
         $("#result").css("color", "red");
