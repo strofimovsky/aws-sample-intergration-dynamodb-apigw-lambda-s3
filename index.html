@@ -29,7 +29,7 @@
 
       get.done(function(data) {
         $("#result").css("color", "blue");
-        if (typeof(data[0].DCOILWTIC) !== 'undefined') {
+        if((data.length) > 0) {
             $("#result").empty().html(data[0].DCOILWTICO);
         } else {
             $("#result").empty().html("NOT FOUND");
