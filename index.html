@@ -1,0 +1,42 @@
+<!doctype HTML>
+<html>
+<head>
+<title>Example</title>
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+
+</head>
+<body>
+
+<div id="result">&nbsp;</div><br>
+
+<form id=example method='GET'>
+    Date: <input type='text' id='date' name='date'><br>
+    <input id=lookup type=submit value="Lookup"><br>
+</form>
+
+<script>
+    $("#example").submit(function(event) {
+      event.preventDefault();
+      var $form = $(this);
+      var query = $('#date').val();
+      var get = $.ajax({
+        url: "https://l0bdm3nsgg.execute-api.us-west-2.amazonaws.com/prod1/date/" + query,
+        type: "GET"
+      });
+
+      get.done(function(data) {
+        $("#result").css("color", "blue");
+        $("#result").empty().html(data[0].DCOILWTICO);
+      });
+      get.fail(function(data) {
+        $("#result").css("color", "red");
+        $("#result").empty().html("API call failed");
+      });
+    });
+</script>
+
+</body>
+</html>
